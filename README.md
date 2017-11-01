@@ -1,1 +1,2 @@
-# test-project-nightwatch-cucumber
+npm i 
+npm run start
