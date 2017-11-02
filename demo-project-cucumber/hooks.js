@@ -1,22 +1,20 @@
 
-        const chromedriver = require('chromedriver');
-        const {defineSupportCode} = require('cucumber');
-        var store = require('data-store')('my-app');
+
+      const chromedriver = require('chromedriver');
+      const { client } = require('nightwatch-cucumber');
+      const { defineSupportCode } = require('cucumber');
 
 
-        defineSupportCode(({Before, After}) => {
-          Before(() => new Promise(resolve => {
-         //   console.log('Before start');
-            setTimeout(() => {
-         //     console.log('Before end');
-              resolve();
-            }, 0);
-          }));
+      defineSupportCode(({ After }) => {
+        After(() => new Promise(resolve => {
+          chromedriver.stop();
+          setTimeout(() => {
+            client.deleteCookies().refresh()
+            resolve();
+          }, 500);
+        }));
+      });
 
-          After((client) => new Promise(resolve => {
-            chromedriver.stop();
-            setTimeout(() => {
-              resolve();
-            }, 0);
-          }));
-        })
+
+
+
